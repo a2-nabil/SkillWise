@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cart</title>
+    <style>
+      .quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e0dfff;
+        padding: 10px;
+      }
+      .quantity-controls {
+        width: 6px;
+        text-align: center;
+        cursor: pointer;
+        display: block;
+      }
+      .cart_item td.product-quantity input.qty {
+        border: 0 !important;
+        text-align: center;
+        padding: 0 !important;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
+      @media (max-width: 767px) {
+        .quantity {
+          padding: 0px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function initializeQuantityControls(inputElement) {
+        // Create decrement button
+        const decrementBtn = document.createElement("span");
+        decrementBtn.textContent = "-";
+        decrementBtn.classList.add("quantity-controls");
+        decrementBtn.classList.add("a2n_minus");
+        decrementBtn.onclick = () => {
+          if (inputElement.value > 0) {
+            inputElement.value = parseInt(inputElement.value) - 1;
+            enableButton(); // Enable button when quantity changes
+          }
+        };
+
+        // Create increment button
+        const incrementBtn = document.createElement("span");
+        incrementBtn.textContent = "+";
+        incrementBtn.classList.add("quantity-controls");
+        incrementBtn.classList.add("a2n_plus");
+        incrementBtn.onclick = () => {
+          inputElement.value = parseInt(inputElement.value) + 1;
+          enableButton(); // Enable button when quantity changes
+        };
+
+        // Insert buttons after the input
+        inputElement.insertAdjacentElement("beforebegin", decrementBtn);
+        inputElement.insertAdjacentElement("afterend", incrementBtn);
+      }
+
+      function enableButton() {
+        const button = document.querySelector(".button[type='submit']");
+        button.removeAttribute("disabled");
+      }
+
+      // Get all input elements with class .input-text
+      const inputElements = document.querySelectorAll(
+        "input[type='number'].input-text"
+      );
+
+      // Initialize quantity controls for each input
+      inputElements.forEach((inputElement) => {
+        initializeQuantityControls(inputElement);
+      });
+    </script>
+  </body>
+</html>
