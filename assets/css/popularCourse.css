@@ -13,6 +13,7 @@
 }
 .a2n_popular-course .a2n_course-thumb {
   position: relative;
+  overflow: hidden;
 }
 .a2n_popular-course .a2n_course-thumb a {
   display: block;
